@@ -4,11 +4,14 @@
 #include <random>
 #include <numeric> // iota
 
-const size_t num_prisoners{10};
+#include "Prisoner.h"
+
+const size_t num_prisoners{3};
 const size_t num_boxes{num_prisoners};
 
 void initialise_boxes(std::vector<size_t> &vec);
 void display_boxes(const std::vector<size_t> &vec);
+void display_prisoners(const std::vector<Prisoner> &vec);
 
 int main()
 {
@@ -19,6 +22,29 @@ int main()
 
     // display shuffled boxes
     display_boxes(boxes);
+
+    // vector of prisoners
+    // std::vector<Prisoner> prisoners(num_prisoners);
+
+    // Prisoner *p = new Prisoner(0, num_prisoners);
+    // delete p;
+
+    // Prisoner p(0, num_prisoners);
+
+    std::vector<Prisoner> prisoners;
+
+    for (size_t i{}; i < num_prisoners; ++i)
+    {
+        // Prisoner *p = new Prisoner(i, num_prisoners);
+        // Prisoner *p = new Prisoner();
+        // prisoners.push_back(*p);
+        // Prisoner p(i, num_prisoners);
+        // prisoners.push_back(p);
+        prisoners.push_back(Prisoner{i, num_prisoners});
+        // delete p;
+    }
+
+    display_prisoners(prisoners);
 
     return 0;
 }
@@ -35,7 +61,15 @@ void initialise_boxes(std::vector<size_t> &vec)
 void display_boxes(const std::vector<size_t> &vec)
 {
     size_t i{};
-    std::cout << "\n";
+    std::cout << "\n=== Boxes ===" << std::endl;
     for (auto box : vec)
         std::cout << "Box " << i++ << ":\t" << box << std::endl;
+}
+
+void display_prisoners(const std::vector<Prisoner> &vec)
+{
+    std::cout << "\n=== Prisoners ===" << std::endl;
+    std::cout << std::boolalpha;
+    for (auto prisoner : vec)
+        prisoner.display();
 }
