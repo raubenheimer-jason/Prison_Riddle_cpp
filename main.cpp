@@ -7,6 +7,7 @@
 const size_t num_prisoners{10};
 const size_t num_boxes{num_prisoners};
 
+void initialise_boxes(std::vector<size_t> &vec);
 void display_boxes(const std::vector<size_t> &vec);
 
 int main()
@@ -14,19 +15,21 @@ int main()
     // vector of size_t, num_boxes in size, all initialised to 0
     std::vector<size_t> boxes(num_boxes, 0);
 
-    // set each value of the vector, starting at 0, and incrementing by 1
-    std::iota(boxes.begin(), boxes.end(), 0);
-
-    display_boxes(boxes);
-
-    // shufle box numbers in boxes vector
-    auto rng = std::default_random_engine{};
-    std::shuffle(boxes.begin(), boxes.end(), rng);
+    initialise_boxes(boxes);
 
     // display shuffled boxes
     display_boxes(boxes);
 
     return 0;
+}
+
+void initialise_boxes(std::vector<size_t> &vec)
+{
+    // set each value of the vector, starting at 0, and incrementing by 1
+    std::iota(vec.begin(), vec.end(), 0);
+    // shufle box numbers in boxes vector
+    auto rng = std::default_random_engine{};
+    std::shuffle(vec.begin(), vec.end(), rng);
 }
 
 void display_boxes(const std::vector<size_t> &vec)
