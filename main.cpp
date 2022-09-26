@@ -10,6 +10,7 @@ const size_t num_prisoners{3};
 const size_t num_boxes{num_prisoners};
 
 void initialise_boxes(std::vector<size_t> &vec);
+void initialise_prisoners(std::vector<Prisoner> &vec);
 void display_boxes(const std::vector<size_t> &vec);
 void display_prisoners(const std::vector<Prisoner> &vec);
 
@@ -17,33 +18,14 @@ int main()
 {
     // vector of size_t, num_boxes in size, all initialised to 0
     std::vector<size_t> boxes(num_boxes, 0);
-
     initialise_boxes(boxes);
-
     // display shuffled boxes
     display_boxes(boxes);
 
     // vector of prisoners
-    // std::vector<Prisoner> prisoners(num_prisoners);
-
-    // Prisoner *p = new Prisoner(0, num_prisoners);
-    // delete p;
-
-    // Prisoner p(0, num_prisoners);
-
     std::vector<Prisoner> prisoners;
-
-    for (size_t i{}; i < num_prisoners; ++i)
-    {
-        // Prisoner *p = new Prisoner(i, num_prisoners);
-        // Prisoner *p = new Prisoner();
-        // prisoners.push_back(*p);
-        // Prisoner p(i, num_prisoners);
-        // prisoners.push_back(p);
-        prisoners.push_back(Prisoner{i, num_prisoners});
-        // delete p;
-    }
-
+    initialise_prisoners(prisoners);
+    // display initialised prisoners
     display_prisoners(prisoners);
 
     return 0;
@@ -56,6 +38,12 @@ void initialise_boxes(std::vector<size_t> &vec)
     // shufle box numbers in boxes vector
     auto rng = std::default_random_engine{};
     std::shuffle(vec.begin(), vec.end(), rng);
+}
+
+void initialise_prisoners(std::vector<Prisoner> &vec)
+{
+    for (size_t i{}; i < num_prisoners; ++i)
+        vec.push_back(Prisoner{i, num_prisoners});
 }
 
 void display_boxes(const std::vector<size_t> &vec)
